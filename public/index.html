@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Menú · Los mejores callos de Tepic</title>
+  <meta name="description" content="Menú de Los mejores callos de Tepic: callo de hacha y mariscos frescos. Miércoles a lunes, 11:00 a.m. – 4:00 p.m.">
+  <meta name="theme-color" content="#FFE01B">
+  <link rel="icon" href="img/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preload" href="fonts/bowlby-one-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/nunito-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="preload" href="data/menu.json" as="fetch" crossorigin>
+</head>
+<body>
+  <header class="rotulo">
+    <p class="rotulo-kicker">Restaurante · Tepic, Nayarit</p>
+    <h1 class="marca" aria-label="Los mejores callos de Tepic">
+      <span class="marca-sup" aria-hidden="true">Los mejores</span>
+      <span class="marca-main" aria-hidden="true">Callos</span>
+      <span class="marca-sub" aria-hidden="true">de Tepic</span>
+    </h1>
+    <p class="rotulo-lema" id="lema">Callo de hacha y mariscos frescos</p>
+
+    <p class="estado" id="estado" role="status" aria-live="polite">
+      <span class="estado-punto" aria-hidden="true"></span>
+      <span class="estado-texto">Consultando horario…</span>
+    </p>
+  </header>
+
+  <div class="cinta" aria-hidden="true">
+    <div class="cinta-pista">
+      <span>Callo de hacha</span><span>Mariscos frescos</span><span>Tepic, Nayarit</span><span>De 11 a.m. a 4 p.m.</span>
+      <span>Callo de hacha</span><span>Mariscos frescos</span><span>Tepic, Nayarit</span><span>De 11 a.m. a 4 p.m.</span>
+    </div>
+  </div>
+
+  <nav class="chips" id="chips" aria-label="Categorías del menú"></nav>
+
+  <main id="menu">
+    <p class="cargando">Cargando menú…</p>
+  </main>
+
+  <section class="acciones" aria-labelledby="titulo-contacto">
+    <h2 class="seccion-titulo" id="titulo-contacto">¿Cómo llegar?</h2>
+    <div class="botones" id="botones"></div>
+  </section>
+
+  <footer class="pie" id="pie">
+    <p class="pie-marca" aria-label="Los mejores callos de Tepic">
+      <span aria-hidden="true">Los mejores</span>
+      <span class="pie-marca-main" aria-hidden="true">Callos</span>
+      <span aria-hidden="true">de Tepic</span>
+    </p>
+    <p id="pie-horario">Miércoles a lunes, 11:00 a.m. – 4:00 p.m.<br><strong>Martes cerrado</strong></p>
+    <p id="pie-direccion">Privada Tepame, Tepic, Nayarit</p>
+  </footer>
+
+  <noscript><p class="cargando">Activa JavaScript para ver el menú.</p></noscript>
+  <script src="js/app.js?v=3" defer></script>
+</body>
+</html>

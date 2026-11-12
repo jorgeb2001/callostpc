@@ -1,0 +1,104 @@
+{
+  "negocio": {
+    "nombre": "Los mejores callos de Tepic",
+    "lema": "Callo de hacha y mariscos frescos",
+    "nota": "Todos nuestros platillos llevan pepino y cebolla morada.",
+    "horario": {
+      "zonaHoraria": "America/Mazatlan",
+      "diasAbiertos": [0, 1, 3, 4, 5, 6],
+      "apertura": "11:00",
+      "cierre": "16:00",
+      "texto": "Miércoles a lunes, 11:00 a.m. – 4:00 p.m.",
+      "textoCerrado": "Martes cerrado"
+    },
+    "direccion": "Privada Tepame, Tepic, Nayarit",
+    "contacto": {
+      "maps": "https://www.google.com/maps/search/?api=1&query=C.+Tepame+40,+El+Tecolote,+Tepic,+Nayarit",
+      "instagram": "https://www.instagram.com/losmejorescallos_tepic/",
+      "instagramUsuario": "@losmejorescallos_tepic",
+      "whatsapp": "",
+      "mandadito": "",
+      "envios": "Envíos a domicilio por Mandadito"
+    }
+  },
+  "categorias": [
+    {
+      "id": "mariscos",
+      "nombre": "Mariscos",
+      "platillos": [
+        {
+          "nombre": "Callo de hacha",
+          "descripcion": "Callo de hacha fresco con pepino y cebolla morada.",
+          "precios": [
+            { "tamano": "1/2 orden", "precio": null },
+            { "tamano": "Orden", "precio": null },
+            { "tamano": "Orden grande", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": ["recomendado"],
+          "disponible": true
+        },
+        {
+          "nombre": "Aguachile",
+          "descripcion": "Camarón crudo con pepino y cebolla morada.",
+          "precios": [
+            { "tamano": "1/2 orden", "precio": null },
+            { "tamano": "Orden", "precio": null },
+            { "tamano": "Orden grande", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
+        },
+        {
+          "nombre": "Pulpo",
+          "descripcion": "Pulpo con pepino y cebolla morada.",
+          "precios": [
+            { "tamano": "1/2 orden", "precio": null },
+            { "tamano": "Orden", "precio": null },
+            { "tamano": "Orden grande", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
+        },
+        {
+          "nombre": "Camarón seco",
+          "descripcion": "Camarón seco con pepino y cebolla morada.",
+          "precios": [
+            { "tamano": "Orden", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
+        }
+      ]
+    },
+    {
+      "id": "ceviche",
+      "nombre": "Ceviche",
+      "platillos": [
+        {
+          "nombre": "Tostada de ceviche",
+          "descripcion": "Ceviche de pescado con pepino y cebolla morada, sobre tostada.",
+          "precios": [
+            { "tamano": "Tostada", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
+        },
+        {
+          "nombre": "Ceviche de pescado",
+          "descripcion": "Ceviche de pescado con pepino y cebolla morada.",
+          "precios": [
+            { "tamano": "1/2 litro", "precio": null }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
+        }
+      ]
+    }
+  ]
+}

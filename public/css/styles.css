@@ -1,5 +1,5 @@
 /* =========================================================
-   Los mejores callos de Tepic — identidad "rótulo"
+   Callo de hacha Jacarandas — identidad "rótulo"
    Base: el letrero pintado del local (amarillo, rojo, sombra negra).
    Acentos tomados del platillo: cebolla morada y pepino.
    ========================================================= */
@@ -95,19 +95,33 @@ img { max-width: 100%; height: auto; display: block; }
   text-transform: uppercase;
 }
 .marca > span { display: block; }
-.marca-sup,
 .marca-sub {
   font-size: clamp(1.45rem, 7.4vw, 2.6rem);
   letter-spacing: .02em;
   text-shadow: 1px 1px 0 var(--tinta), 2px 2px 0 var(--tinta), 3px 3px 0 var(--tinta);
 }
+.marca-nombre {
+  margin-top: .55em;
+  color: var(--tinta);
+  font-size: clamp(1rem, 5vw, 1.7rem);
+  letter-spacing: .12em;
+}
 .marca-main {
   font-size: clamp(3.4rem, 18.5vw, 7rem);
-  margin: .04em 0 .08em;
+  margin: 0 0 .08em;
   letter-spacing: -.005em;
   text-shadow:
     1px 1px 0 var(--tinta), 2px 2px 0 var(--tinta), 3px 3px 0 var(--tinta),
     4px 4px 0 var(--tinta), 5px 5px 0 var(--tinta), 6px 6px 0 var(--tinta);
+}
+
+.marca-lugar {
+  margin: 10px 0 0;
+  color: var(--tinta);
+  font-weight: 900;
+  font-size: .9rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
 }
 
 .rotulo-lema {
@@ -291,6 +305,7 @@ main { padding: 8px var(--gutter) 24px; max-width: 780px; margin: 0 auto; }
 }
 .precios li { display: flex; align-items: baseline; gap: 8px; font-weight: 800; }
 .precio-tamano { flex: none; }
+.precio-gramos { color: var(--texto-2); font-weight: 600; }
 .precio-linea { flex: 1; border-bottom: 2px dotted #CDBBA3; transform: translateY(-4px); }
 .precio-valor {
   flex: none;
@@ -302,6 +317,221 @@ main { padding: 8px var(--gutter) 24px; max-width: 780px; margin: 0 auto; }
 .precio-valor.pendiente { color: #BFAE96; }
 
 .cargando { text-align: center; padding: 40px 0; color: var(--texto-2); }
+
+/* ---------- Arma tu ensalada ---------- */
+.chip-especial { background: var(--amarillo); }
+
+.arma-panel {
+  padding: 18px;
+  background: var(--pepino-claro);
+  border: var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-dura);
+}
+.arma-intro { margin: 0 0 16px; font-weight: 700; }
+
+.arma-opciones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (min-width: 640px) { .arma-opciones { grid-template-columns: repeat(4, 1fr); } }
+
+.arma-opcion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  min-height: 104px;
+  padding: 40px 12px 12px;
+  border: var(--borde);
+  border-radius: var(--radio);
+  box-shadow: 4px 4px 0 var(--tinta);
+  background: var(--papel);
+  color: var(--tinta);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .08s, box-shadow .08s, background-color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.arma-opcion:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--tinta); }
+.arma-opcion:disabled { opacity: .5; cursor: not-allowed; }
+.arma-opcion-nombre {
+  color: var(--rojo);
+  font-family: var(--f-rotulo);
+  font-size: 1.02rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.arma-opcion-detalle { font-size: .85rem; font-weight: 800; color: var(--texto-2); }
+.arma-opcion-marca {
+  position: absolute;
+  top: 10px; right: 10px;
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  border: 2px solid var(--tinta);
+  border-radius: 50%;
+  background: var(--amarillo);
+  font-weight: 900;
+  line-height: 1;
+}
+.arma-opcion[aria-pressed="true"] { background: var(--rojo); }
+.arma-opcion[aria-pressed="true"] .arma-opcion-nombre { color: var(--amarillo); }
+.arma-opcion[aria-pressed="true"] .arma-opcion-detalle { color: var(--crema); }
+
+/* El ticket: como la nota que llevan a la mesa */
+.arma-ticket {
+  margin-top: 18px;
+  padding: 16px;
+  background: var(--papel);
+  border: 2px dashed var(--tinta);
+  border-radius: var(--radio);
+}
+.arma-vacio { margin: 0; text-align: center; color: var(--texto-2); font-weight: 700; }
+.arma-ticket-titulo {
+  margin: 0 0 10px;
+  font-family: var(--f-rotulo);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+.arma-lineas { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.arma-lineas li { display: flex; justify-content: space-between; gap: 12px; font-weight: 700; }
+.arma-lineas li::first-letter { text-transform: uppercase; }
+.arma-lineas-precio { flex: none; font-weight: 900; }
+.arma-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 16px;
+  padding-top: 12px;
+  border-top: 3px solid var(--tinta);
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+.arma-total small {
+  display: block;
+  font-size: .78rem;
+  color: var(--texto-2);
+  text-transform: none;
+}
+.arma-total strong {
+  color: var(--rojo);
+  font-family: var(--f-rotulo);
+  font-weight: 400;
+  font-size: 1.9rem;
+  line-height: 1;
+}
+.arma-acciones { display: grid; gap: 12px; }
+.boton-mesero { background: var(--amarillo); color: var(--tinta); }
+.arma-reiniciar {
+  justify-self: center;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  color: var(--texto-2);
+  font: 800 .95rem var(--f-texto);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Hojas (diálogos que suben desde abajo) ---------- */
+.hoja {
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  margin: auto auto 0;
+  padding: 0;
+  border: var(--borde);
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  background: var(--crema);
+  color: var(--texto);
+}
+.hoja[open] { animation: hoja-sube .22s ease-out; }
+.hoja::backdrop { background: rgba(30, 20, 18, .6); }
+@keyframes hoja-sube { from { transform: translateY(40px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .hoja[open] { animation: none; } }
+@media (min-width: 640px) {
+  .hoja { margin: auto; border-bottom: var(--borde); border-radius: 22px; }
+}
+.hoja-cuerpo { padding: 22px var(--gutter) calc(22px + env(safe-area-inset-bottom, 0px)); }
+.hoja-titulo {
+  margin: 0;
+  color: var(--rojo);
+  font-family: var(--f-rotulo);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.hoja-texto { margin: 4px 0 16px; font-weight: 700; color: var(--texto-2); }
+.hoja-opciones { display: grid; gap: 10px; }
+
+.tamano {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+  padding: 12px 16px;
+  border: var(--borde);
+  border-radius: var(--radio);
+  box-shadow: 4px 4px 0 var(--tinta);
+  background: var(--papel);
+  color: var(--tinta);
+  font: 900 1.05rem var(--f-texto);
+  text-align: left;
+  cursor: pointer;
+}
+.tamano:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--tinta); }
+.tamano-gramos { display: block; font-size: .82rem; font-weight: 700; color: var(--texto-2); }
+.tamano-precio { color: var(--rojo); font-family: var(--f-rotulo); font-size: 1.3rem; }
+.tamano[aria-pressed="true"] { background: var(--amarillo); }
+
+.hoja-quitar,
+.hoja-cancelar {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  min-height: 48px;
+  border-radius: var(--radio);
+  font: 800 1rem var(--f-texto);
+  cursor: pointer;
+}
+.hoja-quitar { border: 2px solid var(--rojo); background: none; color: var(--rojo); }
+.hoja-cancelar { border: 0; background: none; color: var(--texto-2); text-decoration: underline; }
+
+/* Para voltear el celular hacia el mesero */
+.hoja-mesero { background: var(--amarillo); }
+.mesero-pide { margin: 0 0 14px; font-weight: 900; font-size: 1.15rem; }
+.mesero-lista {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.mesero-lista li {
+  color: var(--rojo);
+  font-family: var(--f-rotulo);
+  font-size: clamp(1.35rem, 6.5vw, 1.9rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 var(--tinta), 2px 2px 0 var(--tinta);
+}
+.mesero-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 0 18px;
+  padding-top: 12px;
+  border-top: 3px solid var(--tinta);
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+.mesero-total strong { font-family: var(--f-rotulo); font-weight: 400; font-size: 2.2rem; color: var(--rojo); }
+.boton-listo { width: 100%; background: var(--tinta); color: var(--amarillo); cursor: pointer; }
 
 /* ---------- Contacto ---------- */
 .acciones { padding: 20px var(--gutter) 40px; max-width: 780px; margin: 0 auto; }
@@ -354,5 +584,12 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--rojo); outline-
 .pie-marca-main {
   font-size: 2.6em;
   text-shadow: 1px 1px 0 var(--tinta), 2px 2px 0 var(--tinta), 3px 3px 0 var(--tinta), 4px 4px 0 var(--tinta);
+}
+.pie-marca-nombre {
+  margin-top: .5em;
+  color: var(--crema);
+  font-size: .8em;
+  letter-spacing: .12em;
+  text-shadow: none;
 }
 .pie-envios { color: var(--amarillo); font-weight: 800; }

@@ -2,10 +2,16 @@
   "negocio": {
     "nombre": "Los mejores callos de Tepic",
     "lema": "Callo de hacha y mariscos frescos",
-    "nota": "Todos nuestros platillos llevan pepino y cebolla morada.",
     "horario": {
       "zonaHoraria": "America/Mazatlan",
-      "diasAbiertos": [0, 1, 3, 4, 5, 6],
+      "diasAbiertos": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
       "apertura": "11:00",
       "cierre": "16:00",
       "texto": "Miércoles a lunes, 11:00 a.m. – 4:00 p.m.",
@@ -30,43 +36,127 @@
           "nombre": "Callo de hacha",
           "descripcion": "Callo de hacha fresco con pepino y cebolla morada.",
           "precios": [
-            { "tamano": "1/2 orden", "precio": null },
-            { "tamano": "Orden", "precio": null },
-            { "tamano": "Orden grande", "precio": null }
+            {
+              "tamano": "1/2 orden",
+              "gramos": null,
+              "precio": 220
+            },
+            {
+              "tamano": "Orden",
+              "gramos": null,
+              "precio": 440
+            },
+            {
+              "tamano": "Orden grande",
+              "gramos": null,
+              "precio": 880
+            }
           ],
           "foto": "",
-          "etiquetas": ["recomendado"],
-          "disponible": true
+          "etiquetas": [
+            "recomendado"
+          ],
+          "disponible": true,
+          "armable": true
         },
         {
           "nombre": "Aguachile",
           "descripcion": "Camarón crudo con pepino y cebolla morada.",
           "precios": [
-            { "tamano": "1/2 orden", "precio": null },
-            { "tamano": "Orden", "precio": null },
-            { "tamano": "Orden grande", "precio": null }
+            {
+              "tamano": "1/2 orden",
+              "gramos": null,
+              "precio": 70
+            },
+            {
+              "tamano": "Orden",
+              "gramos": null,
+              "precio": 140
+            },
+            {
+              "tamano": "Orden grande",
+              "gramos": null,
+              "precio": 280
+            }
           ],
           "foto": "",
           "etiquetas": [],
-          "disponible": true
+          "disponible": true,
+          "armable": true
         },
         {
           "nombre": "Pulpo",
           "descripcion": "Pulpo con pepino y cebolla morada.",
           "precios": [
-            { "tamano": "1/2 orden", "precio": null },
-            { "tamano": "Orden", "precio": null },
-            { "tamano": "Orden grande", "precio": null }
+            {
+              "tamano": "1/2 orden",
+              "gramos": null,
+              "precio": 140
+            },
+            {
+              "tamano": "Orden",
+              "gramos": null,
+              "precio": 280
+            },
+            {
+              "tamano": "Orden grande",
+              "gramos": null,
+              "precio": 560
+            }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true,
+          "armable": true
+        },
+        {
+          "nombre": "Camarón seco",
+          "descripcion": "Bolsa de camarón seco.",
+          "precios": [
+            {
+              "tamano": "Orden",
+              "gramos": null,
+              "precio": 100
+            }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true,
+          "armable": true
+        }
+      ]
+    },
+    {
+      "id": "arma-tu-ensalada",
+      "tipo": "arma",
+      "nombre": "Arma tu ensalada",
+      "descripcion": "Combina tus mariscos favoritos y escoge el tamaño de cada uno. Aquí ves cuánto cuesta, y nomás se la enseñas al mesero."
+    },
+    {
+      "id": "ceviche",
+      "nombre": "Ceviche",
+      "platillos": [
+        {
+          "nombre": "Tostada de ceviche",
+          "descripcion": "Ceviche de sierra estilo Sinaloa, sobre una tostada.",
+          "precios": [
+            {
+              "tamano": "Tostada",
+              "precio": 25
+            }
           ],
           "foto": "",
           "etiquetas": [],
           "disponible": true
         },
         {
-          "nombre": "Camarón seco",
-          "descripcion": "Camarón seco con pepino y cebolla morada.",
+          "nombre": "Ceviche de pescado",
+          "descripcion": "Ceviche de sierra estilo Sinaloa.",
           "precios": [
-            { "tamano": "Orden", "precio": null }
+            {
+              "tamano": "1/2 litro",
+              "precio": 150
+            }
           ],
           "foto": "",
           "etiquetas": [],
@@ -75,24 +165,57 @@
       ]
     },
     {
-      "id": "ceviche",
-      "nombre": "Ceviche",
+      "id": "bebidas",
+      "nombre": "Bebidas",
       "platillos": [
         {
-          "nombre": "Tostada de ceviche",
-          "descripcion": "Ceviche de pescado con pepino y cebolla morada, sobre tostada.",
+          "nombre": "Refrescos y agua",
           "precios": [
-            { "tamano": "Tostada", "precio": null }
+            {
+              "tamano": "Coca-Cola",
+              "precio": 30
+            },
+            {
+              "tamano": "Coca-Cola Light",
+              "precio": 30
+            },
+            {
+              "tamano": "Fanta",
+              "precio": 30
+            },
+            {
+              "tamano": "Sprite",
+              "precio": 30
+            },
+            {
+              "tamano": "Agua mineral Topo Chico",
+              "precio": 30
+            },
+            {
+              "tamano": "Agua natural (botella)",
+              "precio": 30
+            }
           ],
           "foto": "",
           "etiquetas": [],
           "disponible": true
         },
         {
-          "nombre": "Ceviche de pescado",
-          "descripcion": "Ceviche de pescado con pepino y cebolla morada.",
+          "nombre": "Cervezas",
+          "descripcion": "Cuartito bien frío.",
           "precios": [
-            { "tamano": "1/2 litro", "precio": null }
+            {
+              "tamano": "Corona ¼",
+              "precio": 20
+            },
+            {
+              "tamano": "Pacífico ¼",
+              "precio": 20
+            },
+            {
+              "tamano": "Clamato preparado con cerveza",
+              "precio": 25
+            }
           ],
           "foto": "",
           "etiquetas": [],

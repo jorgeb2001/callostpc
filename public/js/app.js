@@ -37,6 +37,13 @@
     return el;
   }
 
+  /** Botón con su acción de clic. */
+  function boton(clase, accion, ...hijos) {
+    const b = h('button', { type: 'button', class: clase }, ...hijos);
+    b.addEventListener('click', accion);
+    return b;
+  }
+
   const formatoPrecio = new Intl.NumberFormat('es-MX', { maximumFractionDigits: 0 });
   const precioTexto = (p) => (typeof p === 'number' && p > 0 ? '$' + formatoPrecio.format(p) : '$ —');
 
@@ -59,7 +66,9 @@
       p.descripcion && h('p', { class: 'platillo-desc' }, p.descripcion),
       h('ul', { class: 'precios' },
         (p.precios || []).map((pr) => h('li', {},
-          h('span', { class: 'precio-tamano' }, pr.tamano),
+          h('span', { class: 'precio-tamano' }, pr.tamano,
+            pr.gramos > 0 && h('span', { class: 'precio-gramos' }, ' · ' + pr.gramos + ' g')
+          ),
           h('span', { class: 'precio-linea', 'aria-hidden': 'true' }),
           h('span', { class: 'precio-valor' + (pr.precio > 0 ? '' : ' pendiente') }, precioTexto(pr.precio))
         ))
@@ -76,8 +85,17 @@
     const neg = datos.negocio || {};
     if (neg.nota) main.append(h('p', { class: 'nota', html: ICONO_NOTA }, neg.nota));
 
-    for (const cat of datos.categorias || []) {
+    const categorias = datos.categorias || [];
+    const armables = categorias.flatMap((c) => c.platillos || []).filter((p) => p.armable);
+
+    for (const cat of categorias) {
       const idTitulo = 'titulo-' + cat.id;
+      if (cat.tipo === 'arma') {
+        if (armables.length === 0) continue;
+        main.append(renderArma(cat, armables));
+        chips.append(h('a', { class: 'chip chip-especial', href: '#' + cat.id }, cat.nombre));
+        continue;
+      }
       main.append(
         h('section', { class: 'categoria', id: cat.id, 'aria-labelledby': idTitulo },
           h('h2', { class: 'seccion-titulo', id: idTitulo }, cat.nombre),
@@ -125,6 +143,143 @@
       new IntersectionObserver(([e]) => chips.classList.toggle('pegada', !e.isIntersecting))
         .observe(centinela);
     }
+  }
+
+  /* ---------------- Arma tu ensalada ---------------- */
+
+  /** "1/2 orden" se queda igual; "Orden grande" → "1 orden grande". */
+  const tamanoFrase = (t) => (/^\d/.test(t) ? t : '1 ' + t.toLowerCase());
+  const lineaTexto = ({ p, pr }) => tamanoFrase(pr.tamano) + ' de ' + p.nombre.toLowerCase();
+
+  function abrirDialogo(dlg) {
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else dlg.setAttribute('open', '');
+  }
+  function cerrarDialogo(dlg) {
+    if (typeof dlg.close === 'function') dlg.close();
+    else dlg.removeAttribute('open');
+  }
+
+  /** Hoja que sube desde abajo; se cierra al tocar fuera de ella. */
+  function crearHoja(clase) {
+    const dlg = h('dialog', { class: 'hoja ' + clase });
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) cerrarDialogo(dlg); });
+    document.body.append(dlg);
+    return dlg;
+  }
+
+  function renderArma(cat, ingredientes) {
+    const elegidos = new Map(); // nombre del platillo → índice en sus precios
+    const hojaTamano = crearHoja('hoja-tamano');
+    const hojaMesero = crearHoja('hoja-mesero');
+
+    const lineas = () => ingredientes
+      .filter((p) => elegidos.has(p.nombre))
+      .map((p) => ({ p, pr: p.precios[elegidos.get(p.nombre)] }));
+    const totalDe = (ls) => ls.reduce((s, l) => s + (l.pr.precio || 0), 0);
+
+    function elegir(p, i) {
+      if (i == null) elegidos.delete(p.nombre);
+      else elegidos.set(p.nombre, i);
+      cerrarDialogo(hojaTamano);
+      pintar();
+    }
+
+    function tocar(p) {
+      const actual = elegidos.get(p.nombre);
+      // Con un solo tamaño no hay nada que preguntar: se agrega o se quita.
+      if (p.precios.length === 1) return elegir(p, actual == null ? 0 : null);
+
+      hojaTamano.replaceChildren(h('div', { class: 'hoja-cuerpo' },
+        h('h3', { class: 'hoja-titulo' }, p.nombre),
+        h('p', { class: 'hoja-texto' }, '¿De qué tamaño lo quieres?'),
+        h('div', { class: 'hoja-opciones' }, p.precios.map((pr, i) =>
+          boton('tamano', () => elegir(p, i),
+            h('span', { class: 'tamano-nombre' }, pr.tamano,
+              pr.gramos > 0 && h('span', { class: 'tamano-gramos' }, pr.gramos + ' g')
+            ),
+            h('span', { class: 'tamano-precio' }, precioTexto(pr.precio))
+          )
+        )),
+        actual != null && boton('hoja-quitar', () => elegir(p, null), 'Quitar de mi ensalada'),
+        boton('hoja-cancelar', () => cerrarDialogo(hojaTamano), 'Cancelar')
+      ));
+      const botonesTamano = hojaTamano.querySelectorAll('.tamano');
+      if (actual != null) botonesTamano[actual].setAttribute('aria-pressed', 'true');
+      abrirDialogo(hojaTamano);
+    }
+
+    function ensenarAlMesero() {
+      const ls = lineas();
+      hojaMesero.replaceChildren(h('div', { class: 'hoja-cuerpo' },
+        h('p', { class: 'mesero-pide' }, '¿Me da una ensalada así, por favor?'),
+        h('ul', { class: 'mesero-lista' }, ls.map((l) => h('li', {}, lineaTexto(l)))),
+        h('p', { class: 'mesero-total' }, 'Total ', h('strong', {}, precioTexto(totalDe(ls)))),
+        boton('boton boton-listo', () => cerrarDialogo(hojaMesero), 'Listo')
+      ));
+      abrirDialogo(hojaMesero);
+    }
+
+    const botones = ingredientes.map((p) => {
+      const b = boton('arma-opcion', () => tocar(p));
+      if (p.disponible === false) b.disabled = true;
+      return b;
+    });
+    const ticket = h('div', { class: 'arma-ticket', 'aria-live': 'polite' });
+
+    function pintar() {
+      botones.forEach((b, k) => {
+        const p = ingredientes[k];
+        const i = elegidos.get(p.nombre);
+        const pr = i == null ? null : p.precios[i];
+        const desde = Math.min(...p.precios.map((x) => x.precio).filter((n) => n > 0));
+        b.setAttribute('aria-pressed', pr ? 'true' : 'false');
+        b.replaceChildren(
+          h('span', { class: 'arma-opcion-nombre' }, p.nombre),
+          h('span', { class: 'arma-opcion-detalle' },
+            p.disponible === false ? 'Agotado'
+              : pr ? pr.tamano + ' · ' + precioTexto(pr.precio)
+              : 'Desde ' + precioTexto(desde)),
+          h('span', { class: 'arma-opcion-marca', 'aria-hidden': 'true' }, pr ? '✓' : '+')
+        );
+      });
+
+      const ls = lineas();
+      if (ls.length === 0) {
+        ticket.replaceChildren(h('p', { class: 'arma-vacio' }, 'Toca un marisco para empezar tu ensalada.'));
+        return;
+      }
+      const total = totalDe(ls);
+      const conGramos = ls.every((l) => l.pr.gramos > 0);
+      const gramos = ls.reduce((s, l) => s + (l.pr.gramos || 0), 0);
+
+      ticket.replaceChildren(
+        h('p', { class: 'arma-ticket-titulo' }, 'Tu ensalada'),
+        h('ul', { class: 'arma-lineas' }, ls.map((l) => h('li', {},
+          h('span', {}, lineaTexto(l)),
+          h('span', { class: 'arma-lineas-precio' }, precioTexto(l.pr.precio))
+        ))),
+        h('p', { class: 'arma-total' },
+          h('span', {}, 'Total', conGramos && h('small', {}, gramos + ' g de mariscos')),
+          h('strong', {}, precioTexto(total))
+        ),
+        h('div', { class: 'arma-acciones' },
+          boton('boton boton-mesero', ensenarAlMesero, 'Enseñar al mesero'),
+          boton('arma-reiniciar', () => { elegidos.clear(); pintar(); }, 'Empezar de nuevo')
+        )
+      );
+    }
+
+    pintar();
+    const idTitulo = 'titulo-' + cat.id;
+    return h('section', { class: 'categoria arma', id: cat.id, 'aria-labelledby': idTitulo },
+      h('h2', { class: 'seccion-titulo', id: idTitulo }, cat.nombre),
+      h('div', { class: 'arma-panel' },
+        cat.descripcion && h('p', { class: 'arma-intro' }, cat.descripcion),
+        h('div', { class: 'arma-opciones' }, botones),
+        ticket
+      )
+    );
   }
 
   /* ---------------- Contacto y pie ---------------- */

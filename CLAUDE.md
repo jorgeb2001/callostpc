@@ -54,6 +54,7 @@ Su Instagram no tiene identidad unificada: no hay logo (la foto de perfil es un 
 2. **Indicador "Abierto ahora / Cerrado"** según el horario. Calcularlo con la zona horaria `America/Mazatlan` (Tepic) usando `Intl.DateTimeFormat`, no con la hora local del dispositivo. Martes = cerrado todo el día.
 3. **Botones de contacto:** Google Maps, Instagram, pedir a domicilio (Mandadito) y WhatsApp directo (`https://wa.me/52XXXXXXXXXX`) si lo usan.
 4. **Horario y dirección** visibles en el pie de la página.
+5. **Arma tu ensalada:** el cliente combina mariscos (cada uno con su tamaño) y ve el total en pesos y en gramos. Se configura en `menu.json`: una categoría con `"tipo": "arma"` (su posición en el arreglo define dónde aparece) y `"armable": true` en cada platillo que se puede combinar. Precios y gramos salen de los `precios` de cada platillo. El precio de la combinación es la suma de las partes. Es solo para pedir en el local: termina en "Enseñar al mesero", sin pedidos por WhatsApp ni a domicilio.
 
 ## Estructura sugerida
 
@@ -100,8 +101,8 @@ Esquema de partida para `menu.json` (ajustar cuando lleguen los datos reales):
 
 ## Pendientes (información que falta del dueño)
 
-- [ ] Lista de platillos con precios y tamaños (orden, media orden, litro, etc.)
-- [ ] Bebidas
+- [x] Lista de platillos con precios y tamaños — ya en `menu.json` (falta el gramaje de cada tamaño)
+- [x] Bebidas
 - [ ] Número de WhatsApp para pedidos (si lo usan)
 - [ ] Fotos originales de los platillos, sin texto
 - [ ] Confirmar dirección exacta y link de Google Maps

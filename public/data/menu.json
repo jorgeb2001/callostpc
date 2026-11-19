@@ -220,6 +220,18 @@
           "foto": "",
           "etiquetas": [],
           "disponible": true
+        },
+        {
+          "nombre": "Carajillo",
+          "precios": [
+            {
+              "tamano": "Carajillo",
+              "precio": 80
+            }
+          ],
+          "foto": "",
+          "etiquetas": [],
+          "disponible": true
         }
       ]
     }
